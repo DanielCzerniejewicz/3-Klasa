@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Skibidi Sprawdzian z Svg</title>
+  <style>
+    #div {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      margin-left: 50%;
+      background-color: antiquewhite;
+    }
+  </style>
+</head>
+
+<body>
+  <select id="wybor">
+    <option>triangle</option>
+    <option>circle</option>
+    <option>rectangle</option>
+  </select>
+  <br>
+      <input type="text" placeholder="Color" id="kolorek"><br>
+  <br><button onClick="Zadanie()">Draw</button>
+
+  <div id="div"></div>
+
+  <script>
+    function Zadanie() {
+      let wybor = document.getElementById("wybor").value;
+      let rysowanie = document.getElementById("div");
+      let kolor = document.getElementById("kolorek").value;
+
+      rysowanie.innerHTML = '';
+
+      if (wybor == "triangle") {
+        rysowanie.innerHTML = `<svg height="200" width="200">
+                                  <polygon points="100,10 40,198 190,78" fill="${kolor}" />
+                               </svg>`;
+      } else if (wybor == "circle") {
+        rysowanie.innerHTML = `<svg height="200" width="200">
+                                  <circle cx="100" cy="100" r="80" fill="${kolor}" />
+                               </svg>`;
+      } else if (wybor == "rectangle") {
+        rysowanie.innerHTML = `<svg height="200" width="200">
+                                  <rect width="150" height="100" fill="${kolor}"/>
+                               </svg>`;
+      }
+    }
+  </script>
+</body>
+
+</html>
