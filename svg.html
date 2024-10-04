@@ -1,56 +1,90 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pl">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Skibidi Sprawdzian z Svg</title>
-  <style>
-    #div {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      margin-left: 50%;
-      background-color: antiquewhite;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #blok
+        {
+            position: absolute;
+            background-color: bisque;
+            margin-left: 40%;
+            width: 40%;
+            height: 80%;
+            border-radius: 20px;
+        }
+    </style>
+    <script>
+        function rysowanie()
+        {
+            let rozmiar = document.getElementById("rozmiar").value;
+            let ksztalt = document.getElementById("kształty").value;
+            let kolor = document.getElementById("kolor").value;
+            let div = document.getElementById("blok");
+            let kąt = document.getElementById("kąt").value;
+            let size = 0;
+            if(rozmiar == "S")
+            {
+                size = 200;
+            }
+            else if(rozmiar == "M")
+            {
+                size = 400;
+            }
+            else if(rozmiar == "L")
+            {
+                size = 600;
+            }
+            div.innerHTML = ` `
+            if(ksztalt == "circle")
+            {
+                div.innerHTML = `
+                    <svg width="${size*2}" height = "${size*2}">
+                        <circle cx="100" cy="100" r="${size/6}" fill="${kolor}"></circle>
+                    </svg>
+                `
+            }
+            else if(ksztalt == "rectangle")
+            {
+                div.innerHTML = `
+                        <svg width="${size*2}" height="${size*2}">
+                            <rect width="${size/2}" height="${(size - 20)/2}" fill="${kolor}" transform="rotate(${kąt},${size/4},${(size - 20)/4})"></rect>
+                        </svg>
+                `
+            }
+            else if(ksztalt == "triangle")
+            {
+                div.innerHTML = `
+                    <svg width="${size*2}" height="${size*2}">
+                        <polygon points="100,10 40,198 190,78" fill="${kolor}"></polygon>
+                    </svg>
+                `
+            }
+        }
+
+    </script>
 </head>
-
 <body>
-  <select id="wybor">
-    <option>triangle</option>
-    <option>circle</option>
-    <option>rectangle</option>
-  </select>
-  <br>
-      <input type="text" placeholder="Color" id="kolorek"><br>
-  <br><button onClick="Zadanie()">Draw</button>
-
-  <div id="div"></div>
-
-  <script>
-    function Zadanie() {
-      let wybor = document.getElementById("wybor").value;
-      let rysowanie = document.getElementById("div");
-      let kolor = document.getElementById("kolorek").value;
-
-      rysowanie.innerHTML = '';
-
-      if (wybor == "triangle") {
-        rysowanie.innerHTML = `<svg height="200" width="200">
-                                  <polygon points="100,10 40,198 190,78" fill="${kolor}" />
-                               </svg>`;
-      } else if (wybor == "circle") {
-        rysowanie.innerHTML = `<svg height="200" width="200">
-                                  <circle cx="100" cy="100" r="80" fill="${kolor}" />
-                               </svg>`;
-      } else if (wybor == "rectangle") {
-        rysowanie.innerHTML = `<svg height="200" width="200">
-                                  <rect width="150" height="100" fill="${kolor}"/>
-                               </svg>`;
-      }
-    }
-  </script>
+    <select id = "kształty">
+        <option>circle</option>
+        <option>rectangle</option>
+        <option>triangle</option>
+    </select>
+    <br>
+    <input type="text" placeholder="Color" id="kolor">
+    <br>
+    <input type="text" placeholder="Transform angle (for rect)" id="kąt">
+    <br>
+    <select id="rozmiar">
+        <option>S</option>
+        <option>M</option>
+        <option>L</option>
+    </select>
+    <br>
+    <button onclick="rysowanie()">Draw</button>
+    <div id="blok">
+        <p align="center">Skibidi rysunek</p>
+    </div>
+    <marquee direction="down">Daniel Czerniejewicz</marquee>
 </body>
-
 </html>
