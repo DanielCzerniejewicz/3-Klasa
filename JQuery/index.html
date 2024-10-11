@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Jednoręki bandyta</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        let kasa = 1000;
+
+        function Gra() {
+            let s1 = $('#slot1');
+            let s2 = $('#slot2');
+            let s3 = $('#slot3');
+            let kasaDisplay = $('#kasa');
+
+            if (kasa <= 0) {
+                alert("Koniec kasy hazardzisto!");
+                alert("Graj dalej (reload strony)")
+                location.reload()
+            }
+
+            let r1 = Math.floor(Math.random() * 4) + 1;
+            let r2 = Math.floor(Math.random() * 4) + 1;
+            let r3 = Math.floor(Math.random() * 4) + 1;
+
+            if (r1 === r2 && r2 === r3) {
+                kasa += 1000;
+            } else {
+                kasa -= 100;
+            }
+
+            kasaDisplay.text(`Aktualna kasa: ${kasa} zł`);
+
+            let image1 = r1 === 1 ? 'Strawberry.png' : r1 === 2 ? 'Pomarancza.png' : r1 === 3 ? 'Cytryna.png' : 'Gruszka.png';
+            let image2 = r2 === 1 ? 'Strawberry.png' : r2 === 2 ? 'Pomarancza.png' : r2 === 3 ? 'Cytryna.png' : 'Gruszka.png';
+            let image3 = r3 === 1 ? 'Strawberry.png' : r3 === 2 ? 'Pomarancza.png' : r3 === 3 ? 'Cytryna.png' : 'Gruszka.png';
+
+            s1.html(`<img src="foty/${image1}" alt="Slot 1">`);
+            s2.html(`<img src="foty/${image2}" alt="Slot 2">`);
+            s3.html(`<img src="foty/${image3}" alt="Slot 3">`);
+        }
+    </script>
+</head>
+<body>
+<marquee id="marki">Jednoręki bandyta</marquee>
+<div id="automat">
+    <div id="slot1"></div>
+    <div id="slot2"></div>
+    <div id="slot3"></div>
+</div>
+<div id="kasa">Aktualna kasa: 1000 zł</div>
+<input type="button" id="losowanie" value="GRAJ" onclick="Gra()">
+</body>
+</html>
